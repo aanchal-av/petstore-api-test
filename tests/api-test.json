@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "19aee0ae-db96-42ee-8a64-dff972a73990",
+		"name": "pet store api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get sold pets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d4e946f-39cd-4210-bab9-17db313adbbe",
+						"exec": [
+							"var petsSchema = {",
+							"  \"type\": \"array\",",
+							"  \"items\": {",
+							"    \"type\": \"object\",",
+							"    \"properties\": {",
+							"      \"id\": { \"type\": \"number\" },",
+							"      \"category\": { \"type\": \"object\" },",
+							"      \"name\": { \"type\": \"string\" },",
+							"      \"status\": { \"type\": \"string\" },",
+							"      \"photoUrls\": {",
+							"        \"type\": \"array\",",
+							"        \"items\": {",
+							"          \"type\": \"string\",",
+							"        }",
+							"      },",
+							"      \"tags\": {",
+							"        \"type\": \"array\",",
+							"  ",
+							"        \"items\": {",
+							"          \"type\": \"object\",",
+							"        }",
+							"      }",
+							"    }",
+							"  }",
+							"}",
+							"pm.test(\"should return status code 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"should have response time less than 3000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+							"});",
+							"pm.test(\"should validate response body\", function () {",
+							"    var body = pm.response.json();",
+							"  pm.expect(tv4.validate(body,petsSchema)).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=sold",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "sold"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "187761e5-fca1-4b1b-9431-2fa1e810ce67",
+			"key": "baseUrl",
+			"value": "/api/v3",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
